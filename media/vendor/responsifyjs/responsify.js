@@ -64,3 +64,14 @@
     });
   };
 }( jQuery ));
+
+$(window).on('load', function() {
+  $(".adaptiveimg").removeAttr( "style" )
+    $(".adaptiveimg").responsify();
+});
+  
+  
+$(window).resize(function(){
+  $(".adaptiveimg").removeAttr( "style" )
+    $(".adaptiveimg").responsify();
+})

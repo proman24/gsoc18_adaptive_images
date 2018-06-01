@@ -86,21 +86,6 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 	<jdoc:include type="metas" />
 	<jdoc:include type="styles" />
 	<jdoc:include type="scripts" />
-	<script>
-
-		$(window).on('load', function() {
-			$(".adaptiveimg").removeAttr( "style" )
-    		$(".adaptiveimg").responsify();
-		});
-		  
-		  
-		$(window).resize(function(){
-			$(".adaptiveimg").removeAttr( "style" )
-    		$(".adaptiveimg").responsify();
-		})
-		  
-		  </script>
-
 </head>
 
 <body class="site-grid site <?php echo $option
