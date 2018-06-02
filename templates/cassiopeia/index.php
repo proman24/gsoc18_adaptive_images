@@ -41,13 +41,8 @@ HTMLHelper::_('script', 'template.js', ['version' => 'auto', 'relative' => true]
 // Load custom Javascript file
 HTMLHelper::_('script', 'user.js', ['version' => 'auto', 'relative' => true]);
 
-//HTMLHelper::_('script', 'media/vendor/responsifyjs/responsify.js', ['relative' => false]);
-
 // Load template CSS file
 HTMLHelper::_('stylesheet', 'template.css', ['version' => 'auto', 'relative' => true]);
-
-HTMLHelper::_('script', 'media/vendor/responsifyjs/responsify.js', ['version' => 'auto', 'relative' => false]);
-
 
 // Load custom CSS file
 HTMLHelper::_('stylesheet', 'user.css', array('version' => 'auto', 'relative' => true));

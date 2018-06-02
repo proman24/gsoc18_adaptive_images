@@ -3,7 +3,7 @@ function responsify(item){
         twidth, theight,
         fx1, fy1, fx2, fy2,
         width, height, top, left;
-  // TODO these have to be worked on
+        
     owidth = item.offsetWidth;
     oheight = item.offsetHeight;
     twidth = item.parentNode.clientWidth;
@@ -51,12 +51,11 @@ function responsify(item){
     }
 
     item.parentNode.style.overflow = "hidden";
-
-    item.style.position = "relative";
-    item.style.height = height;
-    item.style.width = width;
-    item.style.left = left;
-    item.style.top = top;
+    var newCSS = " position : relative;  height : "+height+
+          "px; width : "+ width +
+          "px; top : " + top +
+          "px; left : " + left + "px;";
+    item.setAttribute("style",newCSS);
   }
 
 window.onload = function() {
