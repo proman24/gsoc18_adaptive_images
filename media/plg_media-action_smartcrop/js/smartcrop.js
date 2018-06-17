@@ -24,6 +24,12 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 			autoCropArea: 0,
 			minContainerWidth: image.offsetWidth,
 			minContainerHeight: image.offsetHeight,
+			setCanvasData: {
+				top: 0,
+				left: 0,
+				height: image.naturalHeight,
+				width: image.naturalWidth
+			},
 			crop: function (e) {
 				var left, top,
 					canvas_width, canvas_height,
@@ -38,7 +44,6 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				image_height = image.naturalHeight;
 
 				// Top, Bottom, Left, right are the data focus points
-                var canvas_data = this.cropper.getCropBoxData();
                 Joomla.MediaManager.Edit.smartcrop.cropper.top = (top / image_height).toFixed(2);
                 Joomla.MediaManager.Edit.smartcrop.cropper.bottom = ((canvas_height + top) / image_height).toFixed(2);
                 Joomla.MediaManager.Edit.smartcrop.cropper.left = (left / image_width).toFixed(2);
