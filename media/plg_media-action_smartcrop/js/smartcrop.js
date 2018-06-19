@@ -49,6 +49,12 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				document.getElementById('jform_data_focus_left').value = Joomla.MediaManager.Edit.smartcrop.cropper.left;
 				document.getElementById('jform_data_focus_right').value = Joomla.MediaManager.Edit.smartcrop.cropper.right;
 
+				// Saveing cropbox data for focus area
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxLeft = left;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxTop = top;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxWidth = canvas_width;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxHeight = canvas_height;
+
 				// Manageing image extension 
 				var format = Joomla.MediaManager.Edit.original.extension === 'jpg' ? 'jpeg' : Joomla.MediaManager.Edit.original.extension;
 
@@ -59,7 +65,30 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				window.dispatchEvent(new Event('mediaManager.history.point'));
 			}
 		});
-		Joomla.MediaManager.Edit.smartcrop.cropper.setCropBoxData( {"left":0,"top":0,"width":100,"height":100})
+		var setFocusData = function(){
+			var data;
+			var path = getQueryVariable('path');
+			path = path.split(':');
+			path = '/images' + path[1];
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					data = this.responseText;
+					if(data){
+						Joomla.MediaManager.Edit.smartcrop.cropper.setCropBoxData({
+						"left"	: data["box-left"],
+						"top"	: data["box-top"],
+						"width"	: data["box-width"],
+						"height": data["box-height"]
+					});
+					}
+				}
+			};
+			var url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.cropBoxData&path="+path;
+			xhr.open("GET", url, true);
+			xhr.send();
+		}
+		setFocusData();
     }
 
     // Register the Events
@@ -75,7 +104,11 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 			var data = "&data-focus-top="+Joomla.MediaManager.Edit.smartcrop.cropper.top+
 					"&data-focus-left="+Joomla.MediaManager.Edit.smartcrop.cropper.left+
 					"&data-focus-bottom="+Joomla.MediaManager.Edit.smartcrop.cropper.bottom+
-					"&data-focus-right="+Joomla.MediaManager.Edit.smartcrop.cropper.right;
+					"&data-focus-right="+Joomla.MediaManager.Edit.smartcrop.cropper.right+
+					"&box-left="+Joomla.MediaManager.Edit.smartcrop.cropper.boxLeft+
+					"&box-top="+Joomla.MediaManager.Edit.smartcrop.cropper.boxTop+
+					"&box-width="+Joomla.MediaManager.Edit.smartcrop.cropper.boxWidth+
+					"&box-height="+Joomla.MediaManager.Edit.smartcrop.cropper.boxHeight;
 			var xhr = new XMLHttpRequest();
 			var url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.setfocus&path="+path;
 			url += data;

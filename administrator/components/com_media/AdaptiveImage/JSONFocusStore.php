@@ -61,10 +61,14 @@ class JSONFocusStore implements FocusStoreInterface
 	{
 		$newEntry = array(
 			$filePath => array(
-				"data-focus-top" => $dataFocus['data-focus-top'],
-				"data-focus-left" => $dataFocus['data-focus-left'],
+				"data-focus-top" 	=> $dataFocus['data-focus-top'],
+				"data-focus-left" 	=> $dataFocus['data-focus-left'],
 				"data-focus-bottom" => $dataFocus['data-focus-bottom'],
-				"data-focus-right" => $dataFocus['data-focus-right']
+				"data-focus-right" 	=> $dataFocus['data-focus-right'],
+				"box-left"			=> $dataFocus['box-left'],
+				"box-top"			=> $dataFocus['box-top'],
+				"box-width"			=> $dataFocus['box-width'],
+				"box-height"		=> $dataFocus['box-height']
 			)
 		);
 
@@ -78,10 +82,14 @@ class JSONFocusStore implements FocusStoreInterface
 
 			$prevData = json_decode($prevData, true);
 
-			$prevData[$filePath]["data-focus-top"] = $dataFocus['data-focus-top'];
-			$prevData[$filePath]["data-focus-left"] = $dataFocus['data-focus-left'];
-			$prevData[$filePath]["data-focus-bottom"] = $dataFocus['data-focus-bottom'];
-			$prevData[$filePath]["data-focus-right"] = $dataFocus['data-focus-right'];
+			$prevData[$filePath]["data-focus-top"] 		= $dataFocus['data-focus-top'];
+			$prevData[$filePath]["data-focus-left"] 	= $dataFocus['data-focus-left'];
+			$prevData[$filePath]["data-focus-bottom"] 	= $dataFocus['data-focus-bottom'];
+			$prevData[$filePath]["data-focus-right"] 	= $dataFocus['data-focus-right'];
+			$prevData[$filePath]["box-left"] 			= $dataFocus['box-left'];
+			$prevData[$filePath]["box-top"] 			= $dataFocus['box-top'];
+			$prevData[$filePath]["box-width"] 			= $dataFocus['box-width'];
+			$prevData[$filePath]["box-height"] 			= $dataFocus['box-height'];
 
 			$openFileWrite = fopen(static::$dataLocation, "w");
 
