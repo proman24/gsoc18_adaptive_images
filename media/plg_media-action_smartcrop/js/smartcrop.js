@@ -24,12 +24,6 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 			autoCropArea: 0,
 			minContainerWidth: image.offsetWidth,
 			minContainerHeight: image.offsetHeight,
-			setCanvasData: {
-				top: 0,
-				left: 0,
-				height: image.naturalHeight,
-				width: image.naturalWidth
-			},
 			crop: function (e) {
 				var left, top,
 					canvas_width, canvas_height,
@@ -65,6 +59,7 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				window.dispatchEvent(new Event('mediaManager.history.point'));
 			}
 		});
+		Joomla.MediaManager.Edit.smartcrop.cropper.setCropBoxData( {"left":0,"top":0,"width":100,"height":100})
     }
 
     // Register the Events
