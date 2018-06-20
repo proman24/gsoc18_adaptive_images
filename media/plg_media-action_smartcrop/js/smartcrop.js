@@ -55,12 +55,6 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				Joomla.MediaManager.Edit.smartcrop.cropper.boxWidth = canvas_width;
 				Joomla.MediaManager.Edit.smartcrop.cropper.boxHeight = canvas_height;
 
-				// Manageing image extension 
-				var format = Joomla.MediaManager.Edit.original.extension === 'jpg' ? 'jpeg' : Joomla.MediaManager.Edit.original.extension;
-
-				// Takeing the value of the quality
-				var quality = document.getElementById('jform_crop_quality').value;
-
 				// Notify the app that a change has been made
 				window.dispatchEvent(new Event('mediaManager.history.point'));
 			}
@@ -71,21 +65,21 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 			path = path.split(':');
 			path = '/images' + path[1];
 			var xhr = new XMLHttpRequest();
+			var url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.cropBoxData&path="+path;
+			xhr.open("GET", url, true);
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					data = this.responseText;
+					data = JSON.parse(this.responseText);
 					if(data){
 						Joomla.MediaManager.Edit.smartcrop.cropper.setCropBoxData({
 						"left"	: data["box-left"],
 						"top"	: data["box-top"],
 						"width"	: data["box-width"],
 						"height": data["box-height"]
-					});
+						});
 					}
 				}
 			};
-			var url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.cropBoxData&path="+path;
-			xhr.open("GET", url, true);
 			xhr.send();
 		}
 		setFocusData();
