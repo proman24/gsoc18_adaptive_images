@@ -46,10 +46,10 @@ class AdaptiveImageController extends BaseController
 					"data-focus-left"	=> $this->input->getFloat('data-focus-left'),
 					"data-focus-bottom" => $this->input->getFloat('data-focus-bottom'),
 					"data-focus-right"	=> $this->input->getFloat('data-focus-right'),
-					"box-left"			=> $this->input->getInt('box-left'),
-					"box-top"			=> $this->input->getInt('box-top'),
-					"box-width"			=> $this->input->getInt('box-width'),
-					"box-height"		=> $this->input->getInt('box-height')
+					"box-left"			=> $this->input->getFloat('box-left'),
+					"box-top"			=> $this->input->getFloat('box-top'),
+					"box-width"			=> $this->input->getFloat('box-width'),
+					"box-height"		=> $this->input->getFloat('box-height')
 				);
 				$storage = new JSONFocusStore;
 				return $this->performTask($storage, $imgPath, "setfocus", $dataFocus);
