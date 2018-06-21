@@ -60,20 +60,20 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 			}
 		});
 		var setFocusData = function(){
-			var data;
-			var path = getQueryVariable('path');
-			path = path.split(':');
+			var data, path, 
+				xhr, url;
+			path = getQueryVariable('path').split(':');
 			path = '/images' + path[1];
-			var xhr = new XMLHttpRequest();
-			var url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.cropBoxData&path="+path;
+			xhr = new XMLHttpRequest();
+			url = resolveBaseUrl() +"/administrator/index.php?option=com_media&task=adaptiveimage.cropBoxData&path="+path;
 			xhr.open("GET", url, true);
 			xhr.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					if(this.response!=''){
 						data = JSON.parse(this.responseText);
-						Joomla.MediaManager.Edit.smartcrop.cropper.setCropBoxData({
-						"left"	: data["box-left"],
-						"top"	: data["box-top"],
+						Joomla.MediaManager.Edit.smartcrop.cropper.setData({
+						"x"	: data["box-left"],
+						"y"	: data["box-top"],
 						"width"	: data["box-width"],
 						"height": data["box-height"]
 						});
