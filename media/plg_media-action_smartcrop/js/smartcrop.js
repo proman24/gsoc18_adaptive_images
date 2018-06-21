@@ -50,10 +50,10 @@ Joomla.MediaManager.Edit = Joomla.MediaManager.Edit || {};
 				document.getElementById('jform_data_focus_right').value = Joomla.MediaManager.Edit.smartcrop.cropper.right;
 
 				// Saveing cropbox data for focus area
-				Joomla.MediaManager.Edit.smartcrop.cropper.boxLeft = e.detail.x;
-				Joomla.MediaManager.Edit.smartcrop.cropper.boxTop = e.detail.y;
-				Joomla.MediaManager.Edit.smartcrop.cropper.boxWidth = e.detail.width;
-				Joomla.MediaManager.Edit.smartcrop.cropper.boxHeight = e.detail.height;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxLeft = left;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxTop = top;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxWidth = canvas_width;
+				Joomla.MediaManager.Edit.smartcrop.cropper.boxHeight = canvas_height;
 
 				// Notify the app that a change has been made
 				window.dispatchEvent(new Event('mediaManager.history.point'));
