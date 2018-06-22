@@ -33,9 +33,63 @@ class SmartCrop
     {
 
     }
-    public function getOptimumDimentions()
+    /**
+     * For finding the optimum dimention for cropping
+     * 
+     * @param  array  $dataFocus    Dimention of the Focus area
+     * @param  int    $finalWidth   Width of requested image
+     * @param  int    $finalHeight  Height of requested image
+     * @param  float  $imgWidth     Width of original image
+     * @param  float  $imgHeight    Height of the original image
+     * 
+     * @return  array
+     * 
+     * @since 4.0.0
+     */
+    public function getOptimumDimentions($dataFocus, $finalWidth, $finalHeight, $imgWidth, $imgHeight)
     {
-
+        $finalDimentions = array();
+        $fx1 = $dataFocus['data-focus-left'];
+        $fy1 = $dataFocus['data-focus-top'];
+        $fx2 = $dataFocus['data-focus-right'];
+        $fy2 = $datafocus['data-focus-bottom'];
+        if ($imgWidth/$imgHeight > $finalWidth/$finalWidth)
+        {
+            $fwidth = ( $fx2 - $fx1 ) * $imgWidth;
+            if ($fwidth/$imgHeight > $finalWidth/$finalHeight)
+            {
+                $finalDimentions['height'] = $imgHeight * $finalWidth/$finalHeight;
+                $finalDimentions['width']  = $imgWidth  * $finalWidth/$finalHeight;
+                $finalDimentions['x']      = (-1) * $fx1 * $finalDimentions['width'];
+                $finalDimentions['y']      = ($finalHeight - $finalDimentions['height']) / 2;
+            }
+            else
+            {
+                $finalDimentions['height'] = $finalHeight;
+                $finalDimentions['width']  = $finalHeight * $imgWidth / $imgHeight;
+                $finalDimentions['x']      = $finalWidth / 2 - ( $fx1 - $fx2 ) * $finalDimentions['width'] / 2;
+                $finalDimentions['y']      = 0;
+            }
+        }
+        else
+        {
+            $fheight = ( $fy2 - $fy1 ) * $imgHeight;
+            if ($fheight/$imgWidth > $finalWidth/$finalHeight)
+            {
+                $finalDimentions['height'] = $imgHeight * $finalHeight / $fheight;
+                $finalDimentions['width']  = $imgWidth * $finalHeight / $fheight;
+                $finalDimentions['x']      = ($finalWidth - $finalDimentions['width']) / 2;
+                $finalDimentions['y']      = (-1) * $fy1 * $finalDimentions['height'];
+            }
+            else
+            {
+                $finalDimentions['height'] = $finalWidth * $imgHeight / $imgWidth;
+                $finalDimentions['width']  = $finalWidth;
+                $finalDimentions['x']      = 0;
+                $finalDimentions['y']      = $finalHeight / 2 - ($fy1 + $fy2) * $finalDimentions['height'] / 2;
+            }
+        }
+        return $finalDimentions;
     }
     public function saveImage()
     {
