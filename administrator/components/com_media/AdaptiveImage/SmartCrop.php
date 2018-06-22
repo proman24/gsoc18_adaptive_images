@@ -20,11 +20,13 @@ defined('_JEXEC') or die;
 class SmartCrop
 {
     // Path of the image
-    public static $imgSrc;
+    public $imgSrc;
     // Data focus points
-    public static $dataFocus;
+    public $dataFocus;
     // Directory for storeing cache
-    public static $cacheDir;
+    public $cacheDir;
+    //Resized Image;
+    private $imageResized;
     /**
      * Set the requested image path.
      * 
@@ -69,7 +71,7 @@ class SmartCrop
         $fx1 = $dataFocus['data-focus-left'];
         $fy1 = $dataFocus['data-focus-top'];
         $fx2 = $dataFocus['data-focus-right'];
-        $fy2 = $datafocus['data-focus-bottom'];
+        $fy2 = $dataFocus['data-focus-bottom'];
         if ($imgWidth/$imgHeight > $finalWidth/$finalWidth)
         {
             $fwidth = ( $fx2 - $fx1 ) * $imgWidth;
