@@ -19,16 +19,33 @@ defined('_JEXEC') or die;
  */
 class SmartCrop
 {
+    // Path of the image
     public static $imgSrc;
-    
-    public function __constructor()
+    // Data focus points
+    public static $dataFocus;
+    // Directory for storeing cache
+    public static $cacheDir;
+    /**
+     * Set the requested image path.
+     * 
+     * @param  string  $imgSrc     Path of the image
+     * @param  array   $dataFocus  Focus points
+     * 
+     * @since 4.0.0
+     */    
+    public function __constructor($imgSrc, $dataFocus)
     {
-
+        $this->imgSrc = $imgSrc;
+        $this->dataFocus = $dataFocus;
     }
-    public function getFocus()
-    {
 
-    }
+    /**
+     * Resize and crop the image
+     * 
+     * @return  boolean
+     * 
+     * @since 4.0.0
+     */
     public function cropImage()
     {
 
@@ -91,8 +108,18 @@ class SmartCrop
         }
         return $finalDimentions;
     }
+    /**
+     * Save the image to the directory.
+     */
     public function saveImage()
     {
 
+    }
+    /**
+     * Check if cache directory is present or not
+     */
+    public function checkDir()
+    {
+        
     }
 }
