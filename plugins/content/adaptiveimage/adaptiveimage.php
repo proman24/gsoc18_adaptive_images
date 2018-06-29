@@ -36,7 +36,7 @@ class PlgContentAdaptiveImage extends CMSPlugin
 	 *
 	 * @since   4.0.0
 	 */
-	protected $cacheDir = "./images/.cache";
+	protected $cacheDir = JPATH_SITE . "/images/.cache";
 	/**
 	 * Plugin that inserts focus points into the image.
 	 *
