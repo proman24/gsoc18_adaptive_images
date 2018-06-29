@@ -76,6 +76,17 @@ class PlgContentAdaptiveImage extends CMSPlugin
 	 */
 	protected function insertFocus(&$text, &$params)
 	{
+		// Check if the directory is present or not
+		if (! is_dir($this->cacheDir))
+		{
+			return false;
+		}
+
+		// Get all the content of the directory.
+		$images = scandir($this->cacheDir);
+		unset($images[0]);
+		unset($images[1]);
+
 		// Regular Expression from <img> tags in article
 		$searchImage = '(<img[^>]+>)';
 
@@ -93,10 +104,6 @@ class PlgContentAdaptiveImage extends CMSPlugin
 
 			$imageName = explode("/", $imgPath);
 			$imageName = $imageName[max(array_keys($imageName))];
-
-			$images = scandir($this->cacheDir);
-			unset($images[0]);
-			unset($images[1]);
 
 			$cacheImages = array();
 			foreach ($images as $key => $name)
